@@ -1,59 +1,94 @@
+#include <stdlib.h>
+
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include <GL/glut.h>
-#include <math.h>
- 
-GLfloat xf=0, yf=0, graus=0,flag=0;
- 
-int init(void){
-    glClearColor(1.0, 1.0, 1.0, 0.0);     //define a cor de fundo
- 
-    glMatrixMode(GL_PROJECTION);          //carrega a matriz de projeção
-    gluOrtho2D(0,100,0,100);      //define projeção ortogonal 2D
- 
+
+static int width;
+static int height;
+float graus = 45;
+
+void Timer(int value){
+
+    graus += 1.0f;
+    glutPostRedisplay();
+    glutTimerFunc(33,Timer, 1);
+
 }
- 
-void display(void){
-    glClear(GL_COLOR_BUFFER_BIT);         //desenha o fundo (limpa a janela)
- 
- 
-    glColor3f(1.0,0.0,0.0);      //altera o atributo de cor
+static void display(void) {
 
-    // glMatrixMode(GL_MODELVIEW);
-    // glLoadIdentity(); //posiciona a matriz identidade
- 
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //define a cor de fundo
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glViewport(0, 0, width/2, height/2);//Viewport esquerda baixo
+    glLoadIdentity();
+    glOrtho(-3.0, 3.0, -3.0, 3.0, 1.0, 50.0); //define uma proje��o ortogonal
+    gluLookAt(0.0, 0.0, 3.0,
+              0.0, 0.0, 0.0,
+              0.0, 1.0, 0.0);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glutWireTeapot(1);
 
 
-    glTranslatef(yf+5,xf+5, 0);           //responsavel pela transação do objeto
-    glRotatef(graus, 0, 0, 1);                //responsavel pela rotacão do objeto
-    glTranslatef(-5,-5, 0);          //responsavel pela transação do objeto
-  
-    glBegin(GL_QUADS);                    //quadrado
-               glVertex2f(10,  10);
-               glVertex2f(10, 0);
-               glVertex2f(0,0);
-               glVertex2f(0, 10);
- 
-    glEnd();
- 
-    glFlush();                            //desenha os comandos não executados
+
+    glViewport(width/2, 0, width/2, height/2);//Viewport direita baixo
+    glLoadIdentity();
+    glPushMatrix(); //armazena a matriz corrente
+    glRotatef(graus, 1, 0, 0);                //responsavel pela rotac�o do objeto
+    gluPerspective(70.0, 1.0, 2.5, 50.0); //define uma proje��o perspectiva
+    gluLookAt(0.0, 0.0, 4.5,
+              0.0, 0.0, 0.0,
+              0.0, 1.0, 0.0);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glutWireTeapot(1);
+    glPopMatrix(); //restaura a matriz anterior
+
+
+
+    glViewport(0, height/2, width/2, height/2);//Viewport esquerda encima
+    glLoadIdentity();
+    glOrtho(-3.0, 3.0, -3.0, 3.0, 1.0, 50.0); //define uma proje��o ortogonal
+    gluLookAt(0.0, 3.0, 0.0,
+              0.0, 0.0, 0.0,
+              0.0,  0.0,-3.0);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glutWireTeapot(1);
+
+
+
+    glViewport(width/2, height/2, width/2, height/2);//Viewport direita encima
+    glLoadIdentity();
+    glOrtho(-3.0, 3.0, -3.0, 3.0, 1.0, 50.0); //define uma proje��o ortogonal
+    gluLookAt(-3.0, 0.0, 0.0,
+              0.0, 0.0, 0.0,
+              0.0, 1.0, 0.0);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glutWireTeapot(1);
+
+    glFlush();
 }
-void GerenciaTecladoEspecial(unsigned char key, int x, int y){}
-void GerenciaTeclado(unsigned char key, int x, int y)//funcao responsaver pelo controle do teclado
-{}
- 
+
+static void reshape(int w, int h) {
+    width = w;
+    height = h;
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+}
+
+
 int main(int argc, char** argv) {
- 
-    glutInit(&argc,argv);                                     //inicializa o GLUT
-    glutInitDisplayMode(GLUT_SINGLE| GLUT_RGB);               //configura o modo de display
-    glutInitWindowSize(500,500);                              //configura a largura e altura da janela de exibição
-    glutInitWindowPosition(200,200);
-    glutCreateWindow("Quadrado");           //cria a janela de exibição
-    // glutKeyboardFunc(GerenciaTeclado);      //estabelece comunicação com o teclado
-    //glutSpecialFunc(GerenciaTecladoEspecial);
-    init();                          //executa função de inicialização
-    glutDisplayFunc(display);        //estabelece a função "display" como a função callback de exibição.
-    glutMainLoop();                  //mostre tudo e espere
-    return 0;
-}
- 
- 
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(800, 800);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow(argv[0]);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glShadeModel(GL_FLAT);
 
+    glutDisplayFunc(display);
+    glutTimerFunc(20,Timer, 1);
+    glutReshapeFunc(reshape);
+    glutMainLoop();
+    return EXIT_SUCCESS;
+}
