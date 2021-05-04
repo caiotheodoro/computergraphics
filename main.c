@@ -6,7 +6,7 @@
 
 static int width;
 static int height;
-float graus = 45;
+float graus = 0;
 
 void Timer(int value){
 
@@ -21,49 +21,57 @@ static void display(void) {
     glClear(GL_COLOR_BUFFER_BIT);
 
     glViewport(0, 0, width/2, height/2);//Viewport esquerda baixo
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-3.0, 3.0, -3.0, 3.0, 1.0, 50.0); //define uma proje��o ortogonal
     gluLookAt(0.0, 0.0, 3.0,
               0.0, 0.0, 0.0,
               0.0, 1.0, 0.0);
     glColor3f(1.0f, 0.0f, 0.0f);
-    glutWireTeapot(1);
+    glutWireTeapot(2);
+    glPopMatrix(); //restaura a matriz anterior
 
 
 
     glViewport(width/2, 0, width/2, height/2);//Viewport direita baixo
-    glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);
     glPushMatrix(); //armazena a matriz corrente
-    glRotatef(graus, 1, 0, 0);                //responsavel pela rotac�o do objeto
-    gluPerspective(70.0, 1.0, 2.5, 50.0); //define uma proje��o perspectiva
+    glLoadIdentity();
+    gluPerspective(70.0, 1.0, 1.0, 50.0); //define uma proje��o perspectiva
     gluLookAt(0.0, 0.0, 4.5,
               0.0, 0.0, 0.0,
               0.0, 1.0, 0.0);
+    glRotatef(graus, 0, 0, 1);                //responsavel pela rotac�o do objeto
+    glRotatef(45, 1, 0, 0);                //responsavel pela rotac�o do objeto
     glColor3f(1.0f, 0.0f, 0.0f);
-    glutWireTeapot(1);
+    glutWireTeapot(2);
     glPopMatrix(); //restaura a matriz anterior
 
 
 
     glViewport(0, height/2, width/2, height/2);//Viewport esquerda encima
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-3.0, 3.0, -3.0, 3.0, 1.0, 50.0); //define uma proje��o ortogonal
     gluLookAt(0.0, 3.0, 0.0,
               0.0, 0.0, 0.0,
               0.0,  0.0,-3.0);
     glColor3f(1.0f, 0.0f, 0.0f);
-    glutWireTeapot(1);
+    glutWireTeapot(2);
+    glPopMatrix(); //restaura a matriz anterior
 
 
 
     glViewport(width/2, height/2, width/2, height/2);//Viewport direita encima
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-3.0, 3.0, -3.0, 3.0, 1.0, 50.0); //define uma proje��o ortogonal
     gluLookAt(-3.0, 0.0, 0.0,
               0.0, 0.0, 0.0,
               0.0, 1.0, 0.0);
     glColor3f(1.0f, 0.0f, 0.0f);
-    glutWireTeapot(1);
+    glutWireTeapot(2);
+    glPopMatrix(); //restaura a matriz anterior
 
     glFlush();
 }
@@ -71,9 +79,6 @@ static void display(void) {
 static void reshape(int w, int h) {
     width = w;
     height = h;
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glMatrixMode(GL_MODELVIEW);
 }
 
 
