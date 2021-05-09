@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "shaderutil.h": "c",
+        "glut_wrap.h": "c",
+        "windows.h": "c"
+    }
+}
