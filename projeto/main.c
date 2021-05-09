@@ -4,16 +4,34 @@
 
 float alpha=0, beta=0, delta = 1;
 
+int POS_X, POS_Y;
+
+
+GLfloat light_pos[] = {-10.0f, 10.0f, 100.00f, 1.0f};
+
+float pos_x, pos_y, pos_z;
+float angle_x = 30.0f, angle_y = 0.0f;
+
+int x_old = 0, y_old = 0;
+int current_scroll = 5;
+float zoom_per_scroll;
+
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     glTranslatef(pos_x, pos_y, pos_z);
     glRotatef(angle_x, 1.0f, 0.0f, 0.0f);
     glRotatef(angle_y, 0.0f, 1.0f, 0.0f);
-    model.draw();
+    // desenhar
+
+
+
     glutSwapBuffers();
 }
 
+void timer(int value) {
+}
 
 
 
@@ -31,22 +49,20 @@ void init (){
     glEnable(GL_LINE_SMOOTH);      
 }
 
-int main(){
+int main(int argc, char **argv){
     glutInit(&argc, argv);
 
-    glutInitDisplayMode(/*GLUT_DOUBLE*/ | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
-    glEnable(GL_MULTISAMPLE);
-    glHint(GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
-    glutSetOption(GLUT_MULTISAMPLE, 8);
-    POS_X = (glutGet(GLUT_SCREEN_WIDTH) - WIDTH) >> 1;
-    POS_Y = (glutGet(GLUT_SCREEN_HEIGHT) - HEIGHT) >> 1;
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
+    glEnable(GLUT_MULTISAMPLE);
+
+
+    POS_X = (glutGet(GLUT_SCREEN_WIDTH) - 0) >> 1; //altura
+    POS_Y = (glutGet(GLUT_SCREEN_HEIGHT) - 0) >> 1; //largura
     glutInitWindowPosition(POS_X, POS_Y);
-    glutInitWindowSize(WIDTH, HEIGHT);
+    glutInitWindowSize(0, 0);   //altura , largura
     glutCreateWindow("Carrega model");
     init();
     glutDisplayFunc(display);
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
-    glutTimerFunc(0, timer, 0);
+   // glutTimerFunc(0, timer, 0);
     glutMainLoop();
 }
