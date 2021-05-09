@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1448043441 source:d:\dropbox\utfpr\disciplinas\2015\2 semestre\bcc35f - computação gráfica\slides\11 - métodos de rendering para superfícies\códigos slides\windows\exemplo1\main.c
+	<windows.h>
+	<stdlib.h>
+	<math.h>
+	<GL/glut.h>
+
+1465166604 source:d:\dropbox\utfpr\disciplinas\2016\1 semestre\bcc35f - computação gráfica\slides\11 - métodos de rendering para superfícies\códigos slides\windows\exemplo1\main.c
+	<windows.h>
+	<stdlib.h>
+	<math.h>
+	<GL/glut.h>
+
+1510242957 source:c:\users\areth\dropbox\utfpr\disciplinas\2020\2 semestre\bcc35f - computacao grafica\slides\9 - metodos de rendering para superfícies\codigos slides\windows\exemplo1\main.c
+	<windows.h>
+	<GL/glut.h>
+

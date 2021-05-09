@@ -10,7 +10,7 @@ float graus = 0;
 
 void Timer(int value){
 
-    graus += 1.0f;
+    graus += 34.0f;
     glutPostRedisplay();
     glutTimerFunc(33,Timer, 1);
 
@@ -32,13 +32,12 @@ static void display(void) {
     glPopMatrix(); //restaura a matriz anterior
 
 
-
     glViewport(width/2, 0, width/2, height/2);//Viewport direita baixo
     glMatrixMode(GL_PROJECTION);
     glPushMatrix(); //armazena a matriz corrente
     glLoadIdentity();
-    gluPerspective(70.0, 1.0, 1.0, 50.0); //define uma proje��o perspectiva
-    gluLookAt(0.0, 0.0, 4.5,
+    gluPerspective(70.0, 1.0, 2.3, 50.0); //define uma proje��o perspectiva
+    gluLookAt(-3.0, 0.0, 3.4 ,
               0.0, 0.0, 0.0,
               0.0, 1.0, 0.0);
     glRotatef(graus, 0, 0, 1);                //responsavel pela rotac�o do objeto

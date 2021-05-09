@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1444150970 source:d:\dropbox\utfpr\disciplinas\2016\2 semestre\bcc35f - computação gráfica\slides\8 - transformações geométricas 3d\códigos slides\windows\exemplo2\main.c
+	<windows.h>
+	<stdio.h>
+	<GL/glut.h>
+
+1444150970 source:c:\users\areth\dropbox\utfpr\disciplinas\2018\2 semestre\bcc35f - computacao grafica\slides\6 - transformações geométricas 3d\codigos slides\windows\exemplo2\main.c
+	<windows.h>
+	<stdio.h>
+	<GL/glut.h>
+
+1608065910 source:c:\users\areth\dropbox\utfpr\disciplinas\2020\2 semestre\bcc35f - computacao grafica\slides\6 - transformações geométricas 3d\codigos slides\windows\exemplo2\main.c
+	<windows.h>
+	<stdio.h>
+	<GL/glut.h>
+
